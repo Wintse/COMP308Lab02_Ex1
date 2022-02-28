@@ -18,7 +18,7 @@ const getErrorMessage = function(err) {
 			// If a unique index error occurs set the message error
 			case 11000:
 			case 11001:
-				message = 'Username already exists';
+				message = 'Course already exists?';
 				break;
 			// If a general error occurs set the message error
 			default:
@@ -38,7 +38,7 @@ const getErrorMessage = function(err) {
 exports.create = function (req, res, next) {
     // Create a new instance of the 'Course' Mongoose model
     var course = new Course(req.body); //get data from React form
-    console.log("body: " + req.body.username);
+    //console.log("body: " + req.body.studentNumber);
 
     // Use the 'Course' instance's 'save' method to save a new course document
     course.save(function (err) {

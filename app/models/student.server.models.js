@@ -5,8 +5,8 @@ const saltRounds = 10;
 //Define a schema
 const Schema = mongoose.Schema;
 //
-// Define a new 'UserSchema'
-var UserSchema = new Schema({
+// Define a new 'studentSchema'
+var studentSchema = new Schema({
     firstName: String,
 	lastName: String,
 	email: {
@@ -14,13 +14,13 @@ var UserSchema = new Schema({
 		// Validate the email format
 		match: [/.+\@.+\..+/, "Please fill a valid email address"]
 	},
-	username: {
+	studentNumber: {
 		type: String,
-		// Set a unique 'username' index
+		// Set a unique 'studentNumber' index
 		unique: true,
-		// Validate 'username' value existance
-		required: 'Username is required',
-		// Trim the 'username' field
+		// Validate 'studentNumber' value existance
+		required: 'studentNumber is required',
+		// Trim the 'studentNumber' field
 		trim: true
 	},
 	password: {
@@ -35,7 +35,7 @@ var UserSchema = new Schema({
 });
 
 // Set the 'fullname' virtual property
-UserSchema.virtual('fullName').get(function() {
+studentSchema.virtual('fullName').get(function() {
 	return this.firstName + ' ' + this.lastName;
 }).set(function(fullName) {
 	const splitName = fullName.split(' ');
@@ -45,25 +45,25 @@ UserSchema.virtual('fullName').get(function() {
 
 // Use a pre-save middleware to hash the password
 // before saving it into database
-UserSchema.pre('save', function(next){
+studentSchema.pre('save', function(next){
 	//hash the password before saving it
 	this.password = bcrypt.hashSync(this.password, saltRounds);
 	next();
 });
 
-// Create an instance method for authenticating user
-UserSchema.methods.authenticate = function(password) {
+// Create an instance method for authenticating student
+studentSchema.methods.authenticate = function(password) {
 	//compare the hashed password of the database 
-	//with the hashed version of the password the user enters
+	//with the hashed version of the password the student enters
 	return this.password === bcrypt.hashSync(password, saltRounds);
 };
 
 
-// Configure the 'UserSchema' to use getters and virtuals when transforming to JSON
-UserSchema.set('toJSON', {
+// Configure the 'studentSchema' to use getters and virtuals when transforming to JSON
+studentSchema.set('toJSON', {
 	getters: true,
 	virtuals: true
 });
 
-// Create the 'User' model out of the 'UserSchema'
-mongoose.model('User', UserSchema);
+// Create the 'student' model out of the 'studentSchema'
+mongoose.model('student', studentSchema);

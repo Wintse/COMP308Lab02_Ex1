@@ -8,6 +8,8 @@ function View (props) {
   // return a stateful value and funcion to update it
   const [data, setData] = useState();
   // called when user clicks on Logout button
+  // to clear the cookie and set the screen state variable 
+  // back to its initial state.
   const deleteCookie = async () => {
     try {
       await axios.get('/signout');
@@ -16,22 +18,29 @@ function View (props) {
       console.log(e);
     }
   };
-  //called when user clicks on Get Data button
-  const getData = async () => {
+  // called when user clicks on Get Data button
+  // end-point demonstrates another example for the use
+  // of cookie specific response from the server.
+  const verifyCookie = async () => {
     try {
-      const res = await axios.get('/read-cookie');
+      const res = await axios.get('/welcome');
       console.log(res.data)
-      //setData(res.data);
+      setData(res.data);
     } catch (e) {
       console.log(e);
     }
   }
+
   //
   return (
-    <div>
-      <p>{screen}</p>
-      <button onClick={getData}>Get Cookie Data</button>
-      <button onClick={deleteCookie}>Logout</button>
+    <div className="App">
+      <div>
+        <p>{screen}</p>
+        <p>{data}</p>
+        <button onClick={verifyCookie}>Verify Cookie</button>
+        <button onClick={deleteCookie}>Log out</button>
+        </div>            
+      
     </div>
   );
 }

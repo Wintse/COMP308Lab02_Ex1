@@ -38,8 +38,8 @@ const getErrorMessage = function(err) {
 exports.create = function (req, res, next) {
     // Create a new instance of the 'Course' Mongoose model
     var course = new Course(req.body); //get data from React form
-    //console.log("body: " + req.body.studentNumber);
-
+    //console.log("body: " + req.body.studentNumber); //idk if this is needed
+    
     // Use the 'Course' instance's 'save' method to save a new course document
     course.save(function (err) {
         if (err) {

@@ -1,5 +1,5 @@
 // Load the 'students' controller
-var students = require('../../app/controllers/students.server.controller');
+var students = require('../../app/controllers/student.server.controller');
 var express = require('express');
 var router = express.Router();
 // Define the routes module' method

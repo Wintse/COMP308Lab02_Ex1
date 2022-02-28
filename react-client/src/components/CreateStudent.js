@@ -6,13 +6,13 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router-dom';
 
-function Createstudent(props) {
-  const [student, setstudent] = useState({ _id: '', studentNumber: '',password: '', firstName: '', lastName: '', 
+function CreateStudent(props) {
+  const [student, setStudent] = useState({ _id: '', studentNumber: '',password: '', firstName: '', lastName: '', 
                 address: '', city: '', phoneNumber: '', email: '', program: ''});
   const [showLoading, setShowLoading] = useState(false);
   const apiUrl = "http://localhost:3000/";
 
-  const savestudent = (e) => {
+  const saveStudent = (e) => {
     setShowLoading(true);
     e.preventDefault();
     const data = { studentNumber: student.studentNumber, password: student.password, 
@@ -28,7 +28,7 @@ function Createstudent(props) {
 
   const onChange = (e) => {
     e.persist();
-    setstudent({...student, [e.target.name]: e.target.value});
+    setStudent({...student, [e.target.name]: e.target.value});
   }
 
   return (
@@ -39,7 +39,7 @@ function Createstudent(props) {
         </Spinner> 
       } 
       <Jumbotron>
-        <Form onSubmit={savestudent}>
+        <Form onSubmit={saveStudent}>
           <Form.Group>
             <Form.Label> Student Number</Form.Label>
             <Form.Control type="text" name="student " id="studentNumber" placeholder="Enter student number" value={student.studentNumber} onChange={onChange} />
@@ -87,4 +87,4 @@ function Createstudent(props) {
   );
 }
 
-export default withRouter(Createstudent);
+export default withRouter(CreateStudent);

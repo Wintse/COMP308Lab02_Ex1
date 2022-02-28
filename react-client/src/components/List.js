@@ -9,7 +9,7 @@ function List(props) {
   const [data, setData] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
   const [listError, setListError] = useState(false);
-  const apiUrl = "http://localhost:3000/users";
+  const apiUrl = "http://localhost:3000/students";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +47,7 @@ function List(props) {
           </Spinner> }
           <ListGroup>
             {data.map((item, idx) => (
-              <ListGroup.Item key={idx} action onClick={() => { showDetail(item._id) }}>{item.username}</ListGroup.Item>
+              <ListGroup.Item key={idx} action onClick={() => { showDetail(item._id) }}>{item.studentNumber}</ListGroup.Item>
             ))}
           </ListGroup>
         </div>
